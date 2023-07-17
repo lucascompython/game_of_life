@@ -1,0 +1,19 @@
+[package]
+name = "game_of_life"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+iced = {path = "../iced", features = ["canvas", "tokio"]}
+tokio = { version = "1.29.1", features = ["sync"] }
+itertools = "0.11.0"
+rustc-hash = "1.1"
+env_logger = "0.10.0"
+
+[profile.release]
+panic = "abort" # Strip expensive panic clean-up logic
+codegen-units = 1 # Compile crates one after another so the compiler can optimize better
+lto = true # Enables link to optimizations
+opt-level = "z" # Optimize for binary size
+strip = true # Remove debug symbol
